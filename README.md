@@ -3,71 +3,54 @@
 *  Upload the Classes code in main.h
 *  Upload the main logic in main.hpp
 
-*Due Date: Friday 10th of November, end of day*<br>
+# Homework: Implementing Interfaces and Practicing Polymorphism
 
-# Homework Exercise 1: Implementing additional Monsters<br>
+*Due Date: Friday 17th of November, end of day*<br>
 
-**Objective:** *Extend your knowledge of inheritance and polymorphism by implementing specific "Monster" derivatives with unique behaviors.*<br>
+# Homework Exercise 1: Define Interfaces<br>
 
-1. **Dragon Class:**<br>
-• Create a "Dragon" class that inherits from the "Monster" class.<br>
-• The constructor should only take the name parameter and call the base class constructor with initial values for health, strength, and defense ("200", "40", "15" respectively).<br>
-• Override the "performAction" method to print out the dragon’s unique action: breathing fire, and return the damage based on the dragon's strength.<br>
+**Objective:** *Develop foundational interfaces to be used in a smart home system.*<br>
 
-3. **Goblin Class:**<br>
-• Create a "Goblin" class that inherits from the "Monster" class.<br>
-• The constructor should only take the name parameter and call the base class constructor with initial values for health, strength, and defense ("50", "5", "0" respectively).<br>
-• Override the "performAction" method to allow the goblin to attempt to flee if its health is below "20". If fleeing, print a message and return "0" damage. Otherwise, print a message indicating a club swing and return the damage based on the goblin’s strength.<br>
+1. Define a **MediaControlInterface** with the following purely virtual functions:<br>
+• virtual void play() = 0;<br>
+• virtual void pause() = 0;<br>
+• virtual void stop() = 0;<br>
 
-3. **Ogre Class:**<br>
-• Create an "Ogre" class that inherits from the "Monster" class.<br>
-• The constructor should only take the name parameter and call the base class constructor with initial values for health, strength, and defense ("100", "20", "10" respectively).<br>
-• Override the "performAction" method to print out the ogre’s unique action: throwing a boulder, and return the damage based on the ogre’s strength.<br>
+2. **Define a NetworkCommunicationInterface with the following purely virtual functions:**<br>
+• virtual void connectToNetwork() = 0;<br>
+• virtual void disconnectFromNetwork() = 0;<br>
+• virtual void sendData(const std::string& data) = 0;<br>
 
-*Additional Remarks:*<br>
+# Homework Exercise 2: Implement a Controller Class<br>
 
-• Pay attention to the reuse of the "Monster" class constructor for initializing member variables in derived classes.<br>
-• Consider how overriding the "performAction" method allows each monster to exhibit unique behavior despite being instantiated as the same base type ("Monster").<br>
+**Objective:** *Create a controller class that uses objects through the defined interfaces.*<br>
 
-# Homework Exercise 2: Implementing the Mage Class<br>
+1. Implement a **SmartHomeController** class with methods to manage media and network devices. It should have private vectors **std::vector<MediaControlInterface*> _media_devices** and **std::vector<NetworkCommunicationInterface*> _network_devices** that store pointer to the devices in the house. It should also have the following methods<br>
+• **void addMediaDevice(MediaControlInterface device)**; which should add a media device to the controller.
+• **void addNetworkDevice(NetworkCommunicationInterface device)**; which should add a network device to the controller
+• **void controlAllMediaDevices()**; this function is a dummy-implementation (in a realistic scenario this function would control the registered devices) that should just iterate through all the media devices and call some of the functions (like play(), pause(), stop())
+• **void manageNetworkDevices()**; this function is similar to the **controlAllMediaDevices()** function and should iterate through the network devices and call their functions.
 
-**Objective:** *Build on your understanding of class inheritance and virtual functions by creating a "Mage" class derived from "PlayerCharacter".*<br>
+# Homework Exercise 3: Create Derived Classes
 
-1. **Mage Class:**<br>
-• Develop a "Mage" class that is a subclass of the "PlayerCharacter".<br>
-• The constructor should initialize the "Mage" with a name, health, strength (used as a magic power source), and defense.<br>
-• Override the "printOptions" method to display the Mage’s unique combat options: Fireball, Magic Shield, and Heal.<br>
-• Override the "performAction" method to execute an action based on the input action index:<br>
-(a) If "1" is chosen, the Mage casts a Fireball, a powerful spell that deals damage equal to ten times the Mage’s strength.<br>
-(b) If "2" is chosen, the Mage casts a Magic Shield, which increases their defense by "20". This action does not deal damage.<br>
-(c) If "3" is chosen, the Mage performs a Heal, restoring "30" points to their health. This action does not deal damage.<br>
-(d) Any other input should be considered invalid and output an error message without performing any action.<br>
+**Objective:** Develop concrete classes that implement the interfaces.<br>
 
-**Additional Remarks:**<br>
+1. Implement a **SmartSpeaker** class that inherits from **MediaControlInterface** with the following functions:<br>
+• void play() override;<br>
+• void pause() override;<br>
+• void stop() override;<br>
+These function are again dummy implementation and should only print out one string such as "SmartSpeaker is playing" or "SmartSpeaker is paused".<br>
 
-• Reflect on the use of private methods within the class to perform actions, which keeps the action implementations encapsulated within the Mage class.<br>
-• Consider the implications of using strength as a measure for magical ability and how this might affect the design of your character classes.<br>
+2. Implement a **WiFiAdapter** class that inherits from **NetworkCommunicationInterface**
+with the following functions:<br>
+• void connectToNetwork() override;<br>
+• void disconnectFromNetwork() override;<br>
+• void sendData(const std::string& data) override;<br>
+As above, these are dummy implementations are dummy-implementations are are only meant to print out some
 
-# Bonus Exercise: Advanced Mage Class Mechanics
+# Homework Exercise 4: Demonstrate Polymorphism
 
-The BattleMage is an advanced practitioner of magic, capable of powerful offensive and defensive spells. Unlike a regular Mage, a BattleMage must manage a mana resource, which depletes with each spell and regenerates over time. Additionally, some spells have cooldown periods to prevent them from being used consecutively without pause.<br>
+**Objective:** Show the power of polymorphism in action.
 
-**Objective:** Enhance your knowledge of class inheritance, encapsulation, and polymorphism by developing a "BattleMage" class derived from the "Mage" class, which incorporates mana management and cooldowns for casting spells.<br>
-
-1. **BattleMage Class:**<br>
-• Create a "BattleMage" class that inherits from the "Mage" class.<br>
-• The constructor should initialize the ‘BattleMage‘ with a name, health, magic power, defense, and a new attribute, double mana.<br>
-• Implement the void regenerateMana() and void updateCooldowns() private methods to handle mana regeneration and spell cooldowns at the beginning of each action. the regenerateMana function
-should increase the mana by a specific amount (say 20) and the updateCooldowns function should decrease all cooldowns by 1;<br>
-• Override the "printOptions" method to display the BattleMage's combat options, which include the cost and cooldown for each spell.<br>
-• Override the "performAction" method to execute an action based on the input action index and manage the cooldowns and mana costs:<br>
-  (a) If "1" is chosen, the BattleMage attempts to cast a Fireball spell, which has a mana cost and a cooldown period before it can be used again.<br>
-  (b) If "2" is chosen, the BattleMage casts a Magic Shield, which has a mana cost but no cooldown.<br>
-  (c) If "3" is chosen, the BattleMage performs a Heal spell, which has a higher mana cost and a cooldown period.<br>
-  (d) Invalid inputs should prompt an error message without performing any action.<br>
-• Override the "fireball", "magicShield", and "heal" methods to include checks for sufficient mana and to implement cooldowns where appropriate.<br>
-
-**Additional Remarks:**<br>
-
-• Reflect on the strategy behind mana and cooldown management. How do these new gameplay mechanics influence the decisions made during combat?<br>
-• Consider how the introduction of mana as a resource and cooldowns as a limitation create a more dynamic and challenging combat experience.<br>
+1. Write a **main()** function to demonstrate the use of polymorphism in
+controlling different device types through a **SmartHomeController**.
