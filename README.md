@@ -26,12 +26,12 @@
 **Objective:** *Create a controller class that uses objects through the defined interfaces.*<br>
 
 1. Implement a **SmartHomeController** class with methods to manage media and network devices. It should have private vectors **std::vector<MediaControlInterface*> _media_devices** and **std::vector<NetworkCommunicationInterface*> _network_devices** that store pointer to the devices in the house. It should also have the following methods<br>
-• **void addMediaDevice(MediaControlInterface device)**; which should add a media device to the controller.
-• **void addNetworkDevice(NetworkCommunicationInterface device)**; which should add a network device to the controller
-• **void controlAllMediaDevices()**; this function is a dummy-implementation (in a realistic scenario this function would control the registered devices) that should just iterate through all the media devices and call some of the functions (like play(), pause(), stop())
-• **void manageNetworkDevices()**; this function is similar to the **controlAllMediaDevices()** function and should iterate through the network devices and call their functions.
+• **void addMediaDevice(MediaControlInterface device)**; which should add a media device to the controller.<br>
+• **void addNetworkDevice(NetworkCommunicationInterface device)**; which should add a network device to the controller.<br>
+• **void controlAllMediaDevices()**; this function is a dummy-implementation (in a realistic scenario this function would control the registered devices) that should just iterate through all the media devices and call some of the functions (like play(), pause(), stop())<br>
+• **void manageNetworkDevices()**; this function is similar to the **controlAllMediaDevices()** function and should iterate through the network devices and call their functions.<br>
 
-# Homework Exercise 3: Create Derived Classes
+# Homework Exercise 3: Create Derived Classes<br>
 
 **Objective:** Develop concrete classes that implement the interfaces.<br>
 
@@ -46,11 +46,11 @@ with the following functions:<br>
 • void connectToNetwork() override;<br>
 • void disconnectFromNetwork() override;<br>
 • void sendData(const std::string& data) override;<br>
-As above, these are dummy implementations are dummy-implementations are are only meant to print out some
+As above, these are dummy implementations are dummy-implementations are are only meant to print out some<br>
 
-# Homework Exercise 4: Demonstrate Polymorphism
+# Homework Exercise 4: Demonstrate Polymorphism<br>
 
-**Objective:** Show the power of polymorphism in action.
+**Objective:** Show the power of polymorphism in action.<br>
 
 1. Write a **main()** function to demonstrate the use of polymorphism in
-controlling different device types through a **SmartHomeController**.
+controlling different device types through a **SmartHomeController**.<br>
